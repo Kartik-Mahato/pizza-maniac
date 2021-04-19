@@ -7,6 +7,9 @@ const app = express(); //creating an instance of express server
 
 const PORT = process.env.PORT || 3000; //initialization of PORT
 
+// assets/static files
+app.use(express.static('public'));
+
 // routes
 app.get('/', (req, res) => {
     res.render('home');
