@@ -325,6 +325,9 @@ section.hero {
 .btn-primary:hover {
   background: #b23301;
 }
+.btn-primary:focus {
+  outline: none;
+}
 
 section.cart {
   background: #f8f8f8;
@@ -358,4 +361,8 @@ section.register a:hover {
 .noty_theme__mint {
   border-radius: 50px !important;
   padding-left: 8px !important;
+}
+
+a.link {
+  color: #fe5f1e;
 }
