@@ -34,7 +34,7 @@ function initAdmin() {
             return `
                 <tr>
                 <td class="border px-4 py-2 text-green-900">
-                    <p>${order._id}</p>
+                    <p class="text-yellow-500">${order._id}</p>
                     <div>${renderItems(order.items)}</div>
                 </td>
                 <td class="border px-4 py-2">${order.customerId.name}</td>
