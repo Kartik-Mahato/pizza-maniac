@@ -1,5 +1,7 @@
+const socket = io();
 import axios from 'axios';
 import moment from 'moment';
+import Noty from 'noty';
 
 function initAdmin() {
     const orderTableBody = document.querySelector('#orderTableBody');
@@ -81,6 +83,12 @@ function initAdmin() {
         `
         }).join('')
     }
+
+    socket.on('orderPlaced', (data) => {
+        orders.unshift(data);
+        orderTableBody.innerHTML = '';
+        orderTableBody.innerHTML = generateMarkup(orders);
+    });
 }
 
 export default initAdmin

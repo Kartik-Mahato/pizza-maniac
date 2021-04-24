@@ -26,9 +26,11 @@ const initRoutes = (app) => {
     app.post('/orders', auth, orderController().store); //order controller route
     app.get('/customer/orders', auth, orderController().index) //get orders page
 
+    app.get('/customer/orders/:id', auth, orderController().show); //single order route
+
     // admin routes
     app.get('/admin/orders', admin, AdminOrderController().index);
-    app.post('/admin/order/status',admin, statusController().update)
+    app.post('/admin/order/status',admin, statusController().update);
 
 };
 

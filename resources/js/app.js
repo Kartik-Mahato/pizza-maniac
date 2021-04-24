@@ -1,4 +1,6 @@
+let socket = io();
 import axios from 'axios';
+import moment from 'moment';
 import Noty from 'noty';
 import initAdmin from './admin';
 
@@ -46,3 +48,62 @@ if (alertMsg) {
 
 
 initAdmin();
+
+// change order status
+let statuses = document.querySelectorAll('.status-line');
+let hiddenInput = document.querySelector('#hidden-input');
+let order = hiddenInput ? hiddenInput.value : null;
+order = JSON.parse(order)
+
+let time = document.createElement('small');
+
+function updateStatus(order) {
+    statuses.forEach((status) => {
+        status.classList.remove('completed');
+        status.classList.remove('current');
+    })
+    let step = true;
+    statuses.forEach((status) => {
+        let data = status.dataset.status;
+        if (step) {
+            status.classList.add('completed');
+        }
+        if (data === order.status) {
+            step = false
+            time.innerText = moment(order.updatedAt).format('hh:mm A');
+            status.appendChild(time)
+            if (status.nextElementSibling) {
+                status.nextElementSibling.classList.add('current');
+            }
+        }
+    });
+}
+
+updateStatus(order);
+
+// socket
+
+if (order) {
+    socket.emit('join', `order_${order._id}`);
+}
+
+let adminPath = window.location.pathname;
+if (adminPath.includes('admin')) {
+    socket.emit('join', 'adminRoom');
+}
+
+socket.on('orderUpdated', (data) => {
+    const updatedOrder = { ...order }
+    updatedOrder.updateAt = moment().format();
+    updatedOrder.status = data.status;
+
+    updateStatus(updatedOrder);
+
+    new Noty({
+        type: 'success',
+        timeout: '1000',
+        progressBar: false,
+        text: 'Order updated!!!'
+    }).show();
+
+});
