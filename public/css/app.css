@@ -282,6 +282,13 @@ body {
   color: #232323;
 }
 
+nav {
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 99999;
+}
+
 nav li:last-child a {
   background: #fe5f1e;
 }
@@ -472,4 +479,17 @@ section.status {
 .status-box ul li small {
   float: right;
   font-size: 14px;
+}
+
+@media (max-width: 1060px) {
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
+@media (max-width: 768px) {
+  .status-box ul li span:before {
+    font-size: 34px;
+  }
 }

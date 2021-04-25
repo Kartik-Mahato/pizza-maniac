@@ -47,7 +47,7 @@ if (alertMsg) {
 };
 
 
-initAdmin();
+
 
 // change order status
 let statuses = document.querySelectorAll('.status-line');
@@ -89,6 +89,7 @@ if (order) {
 
 let adminPath = window.location.pathname;
 if (adminPath.includes('admin')) {
+    initAdmin();
     socket.emit('join', 'adminRoom');
 }
 

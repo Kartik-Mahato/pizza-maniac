@@ -1961,8 +1961,7 @@ if (alertMsg) {
   }, 2000);
 }
 
-;
-(0,_admin__WEBPACK_IMPORTED_MODULE_3__.default)(); // change order status
+; // change order status
 
 var statuses = document.querySelectorAll('.status-line');
 var hiddenInput = document.querySelector('#hidden-input');
@@ -2004,6 +2003,7 @@ if (order) {
 var adminPath = window.location.pathname;
 
 if (adminPath.includes('admin')) {
+  (0,_admin__WEBPACK_IMPORTED_MODULE_3__.default)();
   socket.emit('join', 'adminRoom');
 }
 
