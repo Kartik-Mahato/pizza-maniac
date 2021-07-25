@@ -21,6 +21,9 @@
                             <%= pizza.qty %>Pcs
                         </span>
                         <span class="font-bold text-lg">₹<%= pizza.item.price * pizza.qty %></span>
+                        <!-- <button class="ml-12 focus:outline-none" id="deleteItem" data-pizzaId="<%= pizza.item._id %>">
+                            <i class="las la-trash text-3xl text-yellow-700"></i>
+                        </button> -->
                     </div>
                     <% } %>
             </div>
@@ -31,21 +34,25 @@
                     <span class="amount text-2xl font-bold ml-2">₹<%= session.cart.totalPrice %></span>
                 </div>
                 <% if(user) { %>
-                <div>
-                    <form action="/orders" method="POST" class="mt-12">
-                        <input type="text" class="border border-gray-400 p-2 w-1/2 mb-4" placeholder="Phone number" name="phone" />
-                        <input type="text" class="border border-gray-400 p-2 w-1/2" placeholder="Address" name="address" />
-                        <div>
-                            <button type="submit" class="btn-primary px-6 py-2 rounded-full text-white font-bold mt-6">Order
-                            Now</button>
-                        </div>
-                    </form>
-                </div>
-                <% } else { %>
-                <a href="/login"
-                    class="inline-block cursor-pointer px-6 py-2 btn-primary rounded-full text-white font-bold mt-6">Login To Continue
-                </a>
-                <% } %>
+                    <div>
+                        <form action="/orders" method="POST" class="mt-12">
+                            <input type="text" class="border border-gray-400 p-2 w-1/2 mb-4" placeholder="Phone number"
+                                name="phone" />
+                            <input type="text" class="border border-gray-400 p-2 w-1/2" placeholder="Address"
+                                name="address" />
+                            <div>
+                                <button type="submit"
+                                    class="btn-primary px-6 py-2 rounded-full text-white font-bold mt-6">Order
+                                    Now</button>
+                            </div>
+                        </form>
+                    </div>
+                    <% } else { %>
+                        <a href="/login"
+                            class="inline-block cursor-pointer px-6 py-2 btn-primary rounded-full text-white font-bold mt-6">Login
+                            To Continue
+                        </a>
+                        <% } %>
             </div>
         </div>
         <% } else { %>
@@ -60,5 +67,5 @@
                         Back</a>
                 </div>
             </div>
-        <% } %>
+            <% } %>
 </section>

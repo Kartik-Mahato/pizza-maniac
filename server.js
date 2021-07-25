@@ -5,7 +5,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const flash = require('express-flash');
-const MongoStore = require('connect-mongo')(session);
+const MongoStore = require('connect-mongo');
 const passport = require('passport');
 const Emitter = require('events');
 
@@ -31,10 +31,10 @@ connection.once('open', () => {
 });
 
 // session store configuration
-let mongoStore = new MongoStore({
-    mongooseConnection: connection,
-    collection: 'sessions'
-});
+// let mongoStore = new MongoStore({
+//     mongooseConnection: connection,
+//     collection: 'sessions'
+// });
 
 // event emitter
 const eventEmitter = new Emitter();
@@ -45,7 +45,9 @@ app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-    store: mongoStore,
+    store: MongoStore.create({
+        client: connection.getClient()
+    }),
     cookie: { maxAge: 1000 * 60 * 60 * 24 } //24hrs
 }));
 
